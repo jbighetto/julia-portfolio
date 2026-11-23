@@ -1,0 +1,68 @@
+---
+import type { Experience } from '../data/experience';
+
+interface Props { entry: Experience; }
+const { entry } = Astro.props;
+const latestRole = entry.roles[entry.roles.length - 1];
+const hasLadder = entry.roles.length > 1;
+const kindLabel = { 'full-time': 'Full-time', internship: 'Internship', education: 'Education' }[entry.kind];
+---
+<li class={`item kind-${entry.kind}`} data-tl-item data-year={entry.year}>
+  <span class="node" aria-hidden="true"></span>
+  <article class="card">
+    <header>
+      <span class="kind">{kindLabel}</span>
+      <time>{entry.period}</time>
+    </header>
+    <h3>{entry.company}</h3>
+    <p class="role">{latestRole.title}</p>
+
+    {hasLadder && (
+      <ol class="ladder" aria-label="Career progression">
+        {entry.roles.map((role) => (
+          <li><span class="when">{role.start}</span><span class="what">{role.title}</span></li>
+        ))}
+      </ol>
+    )}
+
+    <ul class="highlights">
+      {entry.highlights.map((h) => <li>{h}</li>)}
+    </ul>
+  </article>
+</li>
+
+<style>
+  .item { position: relative; list-style: none; margin-bottom: 2rem; opacity: 0.45; transition: opacity 0.5s; }
+  .item.is-reached { opacity: 0.85; }
+  .item.is-active { opacity: 1; }
+
+  .node {
+    position: absolute; top: 1.6rem; width: 18px; height: 18px; border-radius: 50%;
+    left: calc(var(--rail-x) - var(--gutter) - 9px);
+    background: var(--bg); border: 3px solid var(--border); transition: all 0.4s; z-index: 2;
+  }
+  .is-reached .node { border-color: var(--tint); background: var(--tint); }
+  .is-active .node { transform: scale(1.35); box-shadow: 0 0 0 6px color-mix(in srgb, var(--tint) 25%, transparent); }
+
+  .kind-full-time { --tint: var(--accent); }
+  .kind-internship { --tint: var(--olive); }
+  .kind-education { --tint: var(--terracotta); }
+
+  .card { transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s; }
+  .is-active .card { transform: translateX(6px); border-color: var(--tint); }
+
+  header { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; margin-bottom: 0.6rem; }
+  .kind { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tint); }
+  time { color: var(--muted); }
+  h3 { margin-bottom: 0.1rem; }
+  .role { color: var(--muted); margin-bottom: 1rem; }
+
+  .ladder { list-style: none; margin: 0 0 1rem; padding: 0 0 0 1rem; border-left: 2px dashed var(--border); display: grid; gap: 0.5rem; }
+  .ladder li { display: flex; gap: 0.8rem; align-items: baseline; position: relative; }
+  .ladder li::before { content: ''; position: absolute; left: -1.35rem; top: 0.55rem; width: 8px; height: 8px; border-radius: 50%; background: var(--tint); }
+  .when { font-family: var(--font-heading); font-weight: 700; color: var(--tint); min-width: 2.6rem; }
+  .what { font-weight: 600; }
+
+  .highlights { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+  .highlights li { margin-bottom: 0.3rem; }
+</style>

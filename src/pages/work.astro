@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Timeline from '../components/Timeline.astro';
+---
+<BaseLayout title="Work" description="Julia Bighetto’s work experience and career timeline.">
+  <section class="container section">
+    <p class="eyebrow">Work</p>
+    <h1>From intern to engineering manager, and on to product.</h1>
+    <p class="lede">Scroll to follow the path, from my first internship to where I am today.</p>
+    <Timeline />
+  </section>
+</BaseLayout>
+
+<style>
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin-bottom: 3rem; }
+</style>

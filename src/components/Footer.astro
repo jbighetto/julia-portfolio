@@ -1,0 +1,25 @@
+---
+import { site } from '../data/site';
+---
+<footer class="footer" id="contact">
+  <div class="container inner">
+    <div>
+      <h2>Let’s talk.</h2>
+      <p>Interested in B2C products, Media & Entertainment, or Fintech? I’d love to hear from you.</p>
+    </div>
+    <div class="links">
+      <a class="btn btn-primary" href={`mailto:${site.email}`}>Email me</a>
+      <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="btn btn-ghost" href={site.resume} download>Download résumé</a>
+    </div>
+  </div>
+  <p class="copy container">© {new Date().getFullYear()} {site.name}</p>
+</footer>
+
+<style>
+  .footer { background: var(--sand); margin-top: 4rem; padding-top: 3.5rem; }
+  .inner { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center; }
+  .inner p { color: var(--muted); max-width: 40ch; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  .copy { text-align: center; font-size: 0.85rem; color: var(--muted); padding-block: 2rem 1.5rem; margin: 0 auto; }
+</style>

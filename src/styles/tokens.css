@@ -1,0 +1,39 @@
+/* Design tokens: burgundy + earthy neutrals. Change the look here only. */
+@import '@fontsource-variable/bricolage-grotesque';
+
+:root {
+  --font-heading: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', Arial, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
+
+  --bg: #faf4ea;
+  --surface: #fffaf1;
+  --text: #2b1b17;
+  --muted: #6e5a52;
+  --border: #e4d5c0;
+  --accent: #7a1f2b; /* burgundy */
+  --accent-contrast: #faf4ea;
+  --accent-soft: #f1dedb;
+  --terracotta: #c06a4d;
+  --olive: #6b7442;
+  --sand: #e6d7bf;
+  --shadow: 0 10px 30px -18px rgb(70 30 20 / 0.45);
+
+  --radius: 18px;
+  --max-width: 1040px;
+  --nav-height: 68px;
+}
+
+:root[data-theme='dark'] {
+  --bg: #1c1311;
+  --surface: #2a1d1a;
+  --text: #f3e9dc;
+  --muted: #bba79b;
+  --border: #3d2b27;
+  --accent: #d9707f;
+  --accent-contrast: #1c1311;
+  --accent-soft: #3a2023;
+  --terracotta: #d98466;
+  --olive: #a3ad74;
+  --sand: #4a3a33;
+  --shadow: 0 10px 30px -18px rgb(0 0 0 / 0.8);
+}

@@ -1,0 +1,46 @@
+---
+import { site, nav } from '../data/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props { currentPath: string; }
+const { currentPath } = Astro.props;
+const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+<header class="nav">
+  <div class="container bar">
+    <a class="logo" href="/" aria-label="Home">{site.monogram}</a>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}{item.badge && <span class="badge">{item.badge}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50; height: var(--nav-height);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
+  .logo {
+    font-family: var(--font-heading); font-weight: 800; font-size: 1.1rem; text-decoration: none;
+    background: var(--accent); color: var(--accent-contrast);
+    width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  }
+  ul { display: flex; gap: clamp(0.8rem, 3vw, 1.8rem); list-style: none; margin: 0; padding: 0; }
+  li a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.95rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; }
+  li a:hover, li a[aria-current='page'] { border-color: var(--accent); }
+  .badge {
+    margin-left: 0.35rem; font-size: 0.6rem; letter-spacing: 0.08em; padding: 0.1rem 0.4rem;
+    border-radius: 999px; background: var(--terracotta); color: var(--bg); vertical-align: middle;
+  }
+</style>

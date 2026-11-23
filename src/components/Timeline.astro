@@ -1,0 +1,48 @@
+---
+import { experience } from '../data/experience';
+import TimelineItem from './TimelineItem.astro';
+---
+<div class="timeline" data-timeline>
+  <aside class="year-col" aria-hidden="true">
+    <div class="year" data-tl-year>{experience[0].year}</div>
+  </aside>
+
+  <div class="entries">
+    <div class="rail" aria-hidden="true"><div class="fill" data-tl-fill></div></div>
+    <ol>
+      {experience.map((entry) => <TimelineItem entry={entry} />)}
+    </ol>
+  </div>
+</div>
+
+<script>
+  import { initTimeline } from '../scripts/timeline';
+  initTimeline();
+</script>
+
+<style>
+  .timeline {
+    --rail-x: 12px;
+    --gutter: 40px;
+    display: grid; grid-template-columns: 1fr; gap: 1rem; position: relative;
+  }
+  .year-col { position: sticky; top: calc(var(--nav-height) + 0.5rem); align-self: start; z-index: 5; }
+  .year {
+    display: inline-block; font-family: var(--font-heading); font-weight: 800; line-height: 1;
+    font-size: 1.6rem; color: var(--accent); background: var(--bg);
+    padding: 0.3rem 0.9rem; border-radius: 999px; border: 2px solid var(--accent);
+  }
+  .year.is-swapping { animation: swap 0.45s ease; }
+  @keyframes swap { from { opacity: 0; transform: translateY(10px) scale(0.9); } }
+
+  .entries { position: relative; padding-left: var(--gutter); }
+  .entries ol { margin: 0; padding: 0; }
+  .rail { position: absolute; top: 0; bottom: 0; left: calc(var(--rail-x) - 1.5px); width: 3px; background: var(--border); border-radius: 3px; }
+  .fill { width: 100%; height: 0; border-radius: 3px; background: linear-gradient(var(--terracotta), var(--accent)); }
+
+  @media (min-width: 860px) {
+    .timeline { grid-template-columns: 220px 1fr; gap: 2rem; }
+    .year { font-size: clamp(3.5rem, 8vw, 6rem); border: 0; padding: 0; background: transparent; opacity: 0.9; }
+    .year-col { top: 140px; }
+  }
+</style>
