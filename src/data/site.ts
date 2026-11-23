@@ -3,12 +3,12 @@
 export const site = {
   name: 'Julia Bighetto',
   monogram: 'JB',
-  role: 'Technical Product Owner · Software Engineering Manager · MBA student',
   catchphrase: {
-    lead: 'Engineer by training, product-minded by choice,',
-    emphasis: 'making the world a little better.',
+    lead: 'Engineer by training, product-minded by choice.',
+    emphasis: 'Making the world a little better day by day.',
   },
-  intro: 'Barcelona · MBA · retired Software Engineer',
+  bioShort:
+    'Hi, I’m Julia! I’m a retired Software Engineer who left the world of Healthcare to become an MBA student in Barcelona.',
   email: 'julia.bighetto@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-bighetto',
   resume: '/resume.pdf',
@@ -21,22 +21,28 @@ export const nav = [
   { label: 'Blog', href: '/blog', badge: 'WIP' },
 ];
 
-export const focusAreas = [
+export const careerPath = [
   {
-    title: 'B2C at heart',
-    text: 'Products real people use every day, where small improvements add up to big ones.',
+    label: 'Software Engineer',
+    years: '2020 – 2024',
+    text: 'I started at Optum building Java/SQL back-end services for the Risk Audit platform, then moved to a Node/JavaScript platform that gave partners real-time visibility into group insurance installations.',
   },
   {
-    title: 'Media & Entertainment',
-    text: 'Stories, culture and the tools that bring people together around them.',
+    label: 'Engineering Manager',
+    years: '2024 – 2025',
+    text: 'I led a 10-person engineering team on UnitedHealthcare’s multicarrier quoting platform: 100+ features shipped and NPS up 15 points. Turns out I love growing teams as much as products.',
   },
   {
-    title: 'Fintech',
-    text: 'Making money simpler, fairer and more accessible for the people who need it most.',
+    label: 'Technical Product Owner',
+    years: 'Along the way',
+    text: 'Between engineering and the business, I shaped what to build and why. One result: a web app that simplified UHC’s sales experience and cut quoting time by 30%.',
+  },
+  {
+    label: 'MBA at IESE',
+    years: '2025 – 2027',
+    text: 'Now in Barcelona on a Women in STEM scholarship and as a Forté Fellow. I interned at Itaú on AI and product strategy, and I’m leading the Women in Business Conference 2027.',
   },
 ];
-
-export const careerPath = ['Software Engineer', 'Engineering Manager', 'Technical Product Owner', 'MBA at IESE'];
 
 // Placeholder: replace with the real bio when ready.
 export const bio = [
@@ -48,10 +54,6 @@ export const bio = [
     heading: 'What drives me',
     text: 'Placeholder. I want to make the world a better place by building products that change people’s lives for the better.',
   },
-  {
-    heading: 'Outside of work',
-    text: 'Placeholder. Exploring the streets of Barcelona, and whatever else I get up to.',
-  },
 ];
 
 export const quickFacts = [
@@ -60,4 +62,43 @@ export const quickFacts = [
   { label: 'Tech', value: 'JavaScript, TypeScript, Java, MongoDB · Python, SQL' },
   { label: 'Certifications', value: 'Google Cloud Leadership (2025) · Scrum Master & Agile (2021)' },
   { label: 'Work authorization', value: 'European Union, United States, Brazil' },
+];
+
+// "Outside of work" flip cards on the About page.
+export interface OutsideItem {
+  icon: string;
+  title: string;
+  teaser: string;
+  detail: string;
+  link?: { label: string; href: string };
+  progress?: { from: string; to: string; value: number }; // value 0..1
+}
+
+export const outsideWork: OutsideItem[] = [
+  {
+    icon: '🏃‍♀️',
+    title: 'Running',
+    teaser: 'Lacing up in Barcelona',
+    detail: 'I ran a 15k in August, and now I’m training for a half marathon in February 2027.',
+    progress: { from: '15k · August ✓', to: 'Half marathon · Feb 2027', value: 15 / 21.1 },
+  },
+  {
+    icon: '🎤',
+    title: 'Women in Business',
+    teaser: 'Leading WiB Conference 2027',
+    detail: 'I’m VP of Conference for IESE’s Women in Business Conference 2027.',
+    link: { label: 'Visit the conference site', href: 'https://www.wib-conference-iese.com/' },
+  },
+  {
+    icon: '💃',
+    title: 'Salsa',
+    teaser: 'Dancing through the streets',
+    detail: 'I dance salsa through the streets of Barcelona, and I co-preside the Salsa club at IESE.',
+  },
+  {
+    icon: '📚',
+    title: 'Reading',
+    teaser: 'Reading, reading, reading!',
+    detail: 'Always mid-book. Ask me for a recommendation, or send me yours.',
+  },
 ];

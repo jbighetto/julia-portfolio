@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { bio, quickFacts, site } from '../data/site';
+import OutsideWork from '../components/OutsideWork.astro';
 ---
 <BaseLayout title="About" description={`About ${site.name}`}>
   <section class="container section" data-nina="about-intro">
@@ -15,6 +16,7 @@ import { bio, quickFacts, site } from '../data/site';
             <p>{block.text}</p>
           </div>
         ))}
+        <OutsideWork />
         <h2>Quick facts</h2>
         <dl class="facts" data-reveal data-nina="about-facts">
           {quickFacts.map((f) => (<><dt>{f.label}</dt><dd>{f.value}</dd></>))}

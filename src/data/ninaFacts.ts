@@ -14,6 +14,7 @@ export const ninaFacts: Record<string, string[]> = {
     'Dogs have up to ~300 million scent receptors. Humans have about 6 million. I can smell this whole page.',
   ],
   'home-focus': [
+    'Spotify’s Discover Weekly playlists launched in 2015 and quickly became one of its most loved features.',
     'Netflix started out as a DVD-by-mail rental service before becoming a streaming giant.',
     'Brazil’s Pix instant payment system launched in November 2020 and changed how Brazilians pay for just about everything.',
     '“Fintech” is just “financial technology” squished together, a bit like “hackathon”.',
@@ -28,6 +29,11 @@ export const ninaFacts: Record<string, string[]> = {
     'Barcelona’s Sagrada Família has been under construction since 1882.',
     'Barcelona’s Eixample district has street corners cut at an angle on purpose, so every intersection has extra room.',
     'IESE Business School was founded in Barcelona in 1958.',
+  ],
+  'about-outside': [
+    'A half marathon is 21.0975 km, or 13.1 miles. Julia has her eyes on it for February!',
+    'Many libraries run “read to a dog” programs, because dogs are very patient listeners. I’m available.',
+    'Salsa dancers usually count in eight beats, but step on only six of them.',
   ],
   'about-facts': [
     'Julia speaks Portuguese, English and Spanish. I speak fluent “treat?”.',

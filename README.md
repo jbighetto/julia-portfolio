@@ -15,12 +15,15 @@ npm run build    # outputs dist/
 | `src/data/experience.ts` | Work timeline entries |
 | `src/styles/tokens.css` | Colors and fonts (burgundy + earthy palette, light/dark) |
 | `src/components/` | Small reusable pieces (Nav, Footer, Hero, Timeline...) |
+| `src/data/targetCompanies.ts` | Companies on the home page, with logos and "why I admire them" |
 | `src/data/ninaFacts.ts` | Nina the dog's fun facts, keyed by `data-nina` section attributes |
 | `src/scripts/` | Small browser scripts (theme, scroll reveal, timeline) |
 | `src/pages/` | One file per route |
 | `public/` | Static files. Put `resume.pdf` here. |
 
 ## TODO
+- Add official SVG logos for Disney, Scopely and Itaú (they use text wordmarks for now)
+- Rewrite the "why I admire" blurbs in your own words (`src/data/targetCompanies.ts`)
 - Replace placeholder bio and the Aphasia Lab / 18 Moons highlights
 - Add a photo to the About page
 - Add GitHub link once the portfolio has projects

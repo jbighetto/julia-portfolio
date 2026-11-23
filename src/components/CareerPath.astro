@@ -3,23 +3,56 @@ import { careerPath } from '../data/site';
 ---
 <section class="section container" data-nina="home-path">
   <p class="eyebrow">The journey so far</p>
-  <ol class="path">
-    {careerPath.map((step, i) => (
-      <li data-reveal style={`transition-delay:${i * 120}ms`}>
-        <span class="step">{step}</span>
-        {i < careerPath.length - 1 && <span class="arrow" aria-hidden="true">→</span>}
-      </li>
+  <h2>Click through my path.</h2>
+
+  <div class="journey" data-tabs data-start="0">
+    <div class="steps" role="tablist" aria-label="Career journey">
+      <div class="track" aria-hidden="true"><div class="bar"></div></div>
+      {careerPath.map((step, i) => (
+        <button class="step" type="button" role="tab" data-tab>
+          <span class="dot">{i + 1}</span>
+          <span class="label">{step.label}</span>
+          <span class="years">{step.years}</span>
+        </button>
+      ))}
+    </div>
+
+    {careerPath.map((step) => (
+      <div class="panel card" role="tabpanel" data-panel hidden>
+        <h3>{step.label} <small>{step.years}</small></h3>
+        <p>{step.text}</p>
+      </div>
     ))}
-  </ol>
+  </div>
   <a class="btn btn-ghost" href="/work">See the full timeline</a>
 </section>
 
+<script>
+  import { initTabs } from '../scripts/tabs';
+  initTabs();
+</script>
+
 <style>
-  .path { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0; margin: 0 0 2rem; align-items: center; }
-  .path li { display: flex; align-items: center; gap: 0.6rem; }
+  .journey { margin: 1.5rem 0 2rem; }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin-bottom: 1.5rem; }
+  .track { position: absolute; top: 22px; left: 12.5%; right: 12.5%; height: 4px; background: var(--border); border-radius: 4px; }
+  .bar { height: 100%; width: calc(var(--progress, 0) * 100%); background: linear-gradient(90deg, var(--terracotta), var(--accent)); border-radius: 4px; transition: width 0.5s ease; }
   .step {
-    font-family: var(--font-heading); font-weight: 600; padding: 0.6rem 1.1rem;
-    border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+    all: unset; position: relative; z-index: 1; cursor: pointer; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding-bottom: 0.3rem;
   }
-  .arrow { color: var(--terracotta); font-weight: 700; }
+  .step:focus-visible { outline: 3px solid var(--terracotta); border-radius: 12px; }
+  .dot {
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-heading); font-weight: 800;
+    background: var(--bg); color: var(--muted); border: 3px solid var(--border); transition: all 0.3s;
+  }
+  .step:hover .dot { border-color: var(--accent); color: var(--accent); }
+  .step[aria-selected='true'] .dot { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); transform: scale(1.15); box-shadow: 0 0 0 6px var(--accent-soft); }
+  .label { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; line-height: 1.2; color: var(--text); }
+  .years { font-size: 0.75rem; color: var(--muted); }
+  .panel { animation: pop 0.4s ease; }
+  .panel h3 small { font-family: var(--font-body); font-size: 0.8rem; font-weight: 400; color: var(--terracotta); margin-left: 0.5rem; }
+  .panel p { margin: 0; color: var(--muted); max-width: 62ch; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px); } }
+  @media (max-width: 560px) { .label { font-size: 0.78rem; } .dot { width: 38px; height: 38px; } .track { top: 19px; } }
 </style>

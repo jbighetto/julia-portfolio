@@ -1,0 +1,74 @@
+---
+import { outsideWork } from '../data/site';
+---
+<div class="outside" data-nina="about-outside">
+  <h2>Outside of work</h2>
+  <p class="hint">Tap a card to flip it.</p>
+  <div class="grid">
+    {outsideWork.map((item) => (
+      <div class="flip" data-flip data-reveal>
+        <div class="inner">
+          <div class="face front">
+            <button type="button" data-flip-toggle aria-label={`${item.title}: flip for details`}>
+              <span class="icon" aria-hidden="true">{item.icon}</span>
+              <span class="title">{item.title}</span>
+              <span class="teaser">{item.teaser}</span>
+            </button>
+          </div>
+          <div class="face back">
+            <h3><span aria-hidden="true">{item.icon}</span> {item.title}</h3>
+            <p class="detail">{item.detail}</p>
+            {item.progress && (
+              <div class="progress" role="img" aria-label={`${item.progress.from} toward ${item.progress.to}`}>
+                <div class="meter"><div class="fill" style={`--value:${item.progress.value}`}></div></div>
+                <div class="legend"><span>{item.progress.from}</span><span>{item.progress.to}</span></div>
+              </div>
+            )}
+            {item.link && <a href={item.link.href} target="_blank" rel="noopener noreferrer">{item.link.label} →</a>}
+            <button class="back-btn" type="button" data-flip-toggle aria-label="Flip back">↺</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  import { initFlipCards } from '../scripts/flip';
+  initFlipCards();
+</script>
+
+<style>
+  .hint { color: var(--muted); margin: -0.3rem 0 1rem; font-size: 0.9rem; }
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 2rem; }
+  .flip { perspective: 900px; height: 210px; }
+  .inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.3, 0.8, 0.3, 1); }
+  .is-flipped .inner { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius);
+    border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow);
+    transition: visibility 0s 0.3s;
+  }
+  .front { border-top: 4px solid var(--terracotta); }
+  .back { transform: rotateY(180deg); background: var(--accent-soft); border-color: var(--accent); padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .flip:not(.is-flipped) .back, .flip.is-flipped .front { visibility: hidden; }
+  .front button {
+    all: unset; box-sizing: border-box; width: 100%; height: 100%; cursor: pointer; padding: 1.2rem; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; border-radius: var(--radius);
+  }
+  .front button:focus-visible, .back-btn:focus-visible { outline: 3px solid var(--terracotta); }
+  .icon { font-size: 2.6rem; transition: transform 0.3s; }
+  .front button:hover .icon { transform: scale(1.15) rotate(-6deg); }
+  .title { font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; }
+  .teaser { color: var(--muted); font-size: 0.88rem; }
+  .back h3 { margin: 0; font-size: 1.05rem; color: var(--accent); }
+  .detail { margin: 0; font-size: 0.95rem; }
+  .back a { font-weight: 700; font-size: 0.9rem; }
+  .back-btn { all: unset; position: absolute; right: 0.7rem; bottom: 0.5rem; cursor: pointer; font-size: 1.2rem; color: var(--accent); width: 28px; height: 28px; text-align: center; border-radius: 50%; }
+  .progress { margin-top: auto; padding-bottom: 0.8rem; }
+  .meter { height: 10px; border-radius: 10px; background: var(--bg); overflow: hidden; }
+  .fill { height: 100%; width: 0; border-radius: 10px; background: linear-gradient(90deg, var(--terracotta), var(--accent)); transition: width 1s ease 0.5s; }
+  .is-flipped .fill { width: calc(var(--value) * 100%); }
+  .legend { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+  @media (prefers-reduced-motion: reduce) { .inner { transition: none; } .face { transition: none; } }
+</style>

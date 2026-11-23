@@ -53,4 +53,11 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
     margin-left: 0.35rem; font-size: 0.6rem; letter-spacing: 0.08em; padding: 0.1rem 0.4rem;
     border-radius: 999px; background: var(--terracotta); color: var(--bg); vertical-align: middle;
   }
+  @media (max-width: 480px) {
+    .bar { gap: 0.5rem; }
+    ul { gap: 0.7rem; }
+    li a { font-size: 0.85rem; }
+    .badge { display: none; }
+    .tools { gap: 0.35rem; }
+  }
 </style>

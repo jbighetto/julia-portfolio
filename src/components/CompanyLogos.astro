@@ -1,0 +1,55 @@
+---
+import { targetCompanies } from '../data/targetCompanies';
+---
+<section class="section container" data-nina="home-focus">
+  <p class="eyebrow">Where I want to build</p>
+  <h2>Products that change lives for the better.</h2>
+  <p class="hint">These are the companies I admire most. Tap a logo to see why.</p>
+
+  <div data-tabs data-start="0">
+    <div class="logos" role="tablist" aria-label="Companies I admire">
+      {targetCompanies.map((c) => (
+        <button class="tile" type="button" role="tab" data-tab aria-label={c.name}
+          style={`--brand:${c.color}; --brand-dark:${c.colorDark ?? c.color}`}>
+          {c.iconPath
+            ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d={c.iconPath} fill="currentColor" /></svg>
+            : <span class="wordmark" aria-hidden="true">{c.wordmark}</span>}
+        </button>
+      ))}
+    </div>
+
+    {targetCompanies.map((c) => (
+      <div class="panel card" role="tabpanel" data-panel hidden style={`--brand:${c.color}; --brand-dark:${c.colorDark ?? c.color}`}>
+        <h3>Why I admire {c.name}</h3>
+        <p>{c.why}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { initTabs } from '../scripts/tabs';
+  initTabs();
+</script>
+
+<style>
+  .hint { color: var(--muted); margin-bottom: 1.5rem; }
+  .logos { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); margin-bottom: 1.2rem; }
+  .tile {
+    height: 84px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface);
+    color: var(--muted); display: grid; place-items: center; cursor: pointer; padding: 0 0.8rem;
+    transition: transform 0.2s, color 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .tile svg { width: 34px; height: 34px; }
+  .wordmark { font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; }
+  .tile:hover, .tile[aria-selected='true'] { color: var(--brand); transform: translateY(-3px); }
+  .tile[aria-selected='true'] { border-color: var(--brand); box-shadow: var(--shadow); }
+  :global([data-theme='dark']) .tile:hover, :global([data-theme='dark']) .tile[aria-selected='true'] { color: var(--brand-dark); }
+  :global([data-theme='dark']) .tile[aria-selected='true'] { border-color: var(--brand-dark); }
+
+  .panel { border-left: 5px solid var(--brand); animation: pop 0.4s ease; }
+  :global([data-theme='dark']) .panel { border-left-color: var(--brand-dark); }
+  .panel h3 { margin-bottom: 0.4rem; }
+  .panel p { margin: 0; color: var(--muted); max-width: 62ch; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px); } }
+</style>
