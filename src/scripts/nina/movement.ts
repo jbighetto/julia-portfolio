@@ -2,20 +2,20 @@
 // in the corner and trots in place while the page scrolls.
 
 const SPEED = 320; // px per second, top speed
-const SIZE = { w: 120, h: 90 };
+const SIZE = { w: 100, h: 115 };
 
 export function initMovement(root: HTMLElement, sprite: HTMLElement) {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canFollow = matchMedia('(pointer: fine)').matches && !reduceMotion;
   const small = () => window.innerWidth < 600;
-  const size = () => (small() ? { w: 84, h: 63 } : SIZE);
+  const size = () => (small() ? { w: 72, h: 83 } : SIZE);
 
   const home = () => ({ x: window.innerWidth - size().w - 16, y: window.innerHeight - size().h - 16 });
   const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
   let pos = home();
   let target = home();
-  let facing = -1; // faces left at home so she looks into the page
+  let facing = -1; // leans left at home, toward the page
   let last = 0;
   let raf = 0;
   let walking = false;
@@ -28,7 +28,7 @@ export function initMovement(root: HTMLElement, sprite: HTMLElement) {
 
   function render() {
     root.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-    sprite.style.transform = `scaleX(${facing})`;
+    sprite.style.setProperty('--face', String(facing));
     const { w } = size();
     root.classList.toggle('bubble-left', pos.x < 190);
     root.classList.toggle('bubble-right', pos.x > window.innerWidth - w - 190);
