@@ -20,7 +20,10 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
         ))}
       </ul>
     </nav>
-    <ThemeToggle />
+    <div class="tools">
+      <button class="paw" type="button" data-nina-toggle aria-pressed="true" aria-label="Show or hide Nina the dog" title="Nina on/off">🐾</button>
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
@@ -36,6 +39,13 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
     background: var(--accent); color: var(--accent-contrast);
     width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
   }
+  .tools { display: flex; gap: 0.5rem; }
+  .paw {
+    background: transparent; border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; font-size: 1rem; transition: background 0.2s, opacity 0.2s;
+  }
+  .paw:hover { background: var(--accent-soft); }
+  .paw[aria-pressed='false'] { opacity: 0.45; }
   ul { display: flex; gap: clamp(0.8rem, 3vw, 1.8rem); list-style: none; margin: 0; padding: 0; }
   li a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.95rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; }
   li a:hover, li a[aria-current='page'] { border-color: var(--accent); }

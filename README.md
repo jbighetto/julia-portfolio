@@ -15,6 +15,7 @@ npm run build    # outputs dist/
 | `src/data/experience.ts` | Work timeline entries |
 | `src/styles/tokens.css` | Colors and fonts (burgundy + earthy palette, light/dark) |
 | `src/components/` | Small reusable pieces (Nav, Footer, Hero, Timeline...) |
+| `src/data/ninaFacts.ts` | Nina the dog's fun facts, keyed by `data-nina` section attributes |
 | `src/scripts/` | Small browser scripts (theme, scroll reveal, timeline) |
 | `src/pages/` | One file per route |
 | `public/` | Static files. Put `resume.pdf` here. |

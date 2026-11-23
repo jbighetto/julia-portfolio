@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Nina from '../components/Nina.astro';
 import { site } from '../data/site';
 
 interface Props { title?: string; description?: string; }
@@ -20,16 +21,18 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
     <script is:inline>
       document.documentElement.classList.add('js');
       try {
+        document.documentElement.dataset.nina = localStorage.getItem('nina') === 'off' ? 'off' : 'on';
         const saved = localStorage.getItem('theme');
         const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-      } catch { document.documentElement.dataset.theme = 'light'; }
+      } catch { document.documentElement.dataset.theme = 'light'; document.documentElement.dataset.nina = 'on'; }
     </script>
   </head>
   <body>
     <Nav currentPath={Astro.url.pathname} />
     <main><slot /></main>
     <Footer />
+    <Nina />
     <script>
       import { initThemeToggle } from '../scripts/theme';
       import { initReveal } from '../scripts/reveal';

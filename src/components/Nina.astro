@@ -1,0 +1,86 @@
+---
+import NinaSprite from './NinaSprite.astro';
+---
+<div class="nina" data-nina-root>
+  <div class="bubble" data-nina-bubble role="status" aria-live="polite">
+    <p data-nina-text></p>
+    <div class="actions">
+      <button type="button" data-nina-next>Another fact</button>
+      <button type="button" data-nina-close aria-label="Close">✕</button>
+    </div>
+  </div>
+  <button class="body" type="button" data-nina-pet aria-label="Nina the dog. Click for a fun fact">
+    <span class="sprite" data-nina-sprite><NinaSprite /></span>
+  </button>
+</div>
+
+<script>
+  import { initNina } from '../scripts/nina';
+  initNina();
+</script>
+
+<style is:global>
+  .nina {
+    position: fixed; top: 0; left: 0; z-index: 60; width: 120px; height: 90px;
+    pointer-events: none; will-change: transform;
+  }
+  html[data-nina='off'] .nina { display: none; }
+  .nina .body { all: unset; display: block; width: 100%; height: 100%; cursor: pointer; pointer-events: auto; }
+  .nina .body:focus-visible { outline: 3px solid var(--terracotta); border-radius: 12px; }
+  .nina .sprite { display: block; width: 100%; height: 100%; transition: transform 0.15s; }
+  .nina-svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* Speech bubble */
+  .nina .bubble {
+    position: absolute; bottom: calc(100% + 6px); left: 50%; width: 230px; margin-left: -115px;
+    background: var(--surface); color: var(--text); border: 2px solid var(--accent); border-radius: 16px;
+    padding: 0.75rem 0.9rem; font-size: 0.88rem; line-height: 1.4; box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(8px) scale(0.95); pointer-events: none; transition: opacity 0.25s, transform 0.25s;
+  }
+  .nina .bubble.is-open { opacity: 1; transform: none; pointer-events: auto; }
+  .nina .bubble p { margin: 0 0 0.5rem; }
+  .nina .bubble::after {
+    content: ''; position: absolute; top: 100%; left: 50%; margin-left: -8px; width: 14px; height: 14px;
+    background: var(--surface); border: solid var(--accent); border-width: 0 2px 2px 0; transform: translateY(-8px) rotate(45deg);
+  }
+  .nina.bubble-left .bubble { left: 0; margin-left: 0; }
+  .nina.bubble-left .bubble::after { left: 40px; }
+  .nina.bubble-right .bubble { left: auto; right: 0; margin-left: 0; }
+  .nina.bubble-right .bubble::after { left: auto; right: 40px; }
+  .nina.bubble-below .bubble { bottom: auto; top: calc(100% + 6px); }
+  .nina.bubble-below .bubble::after { top: auto; bottom: 100%; transform: translateY(8px) rotate(225deg); }
+  .nina .actions { display: flex; justify-content: space-between; gap: 0.5rem; }
+  .nina .actions button {
+    font: inherit; font-size: 0.78rem; font-weight: 700; color: var(--accent); background: transparent;
+    border: 0; cursor: pointer; padding: 0.1rem 0.2rem;
+  }
+  .nina .actions button:hover { text-decoration: underline; }
+
+  /* Animation: tail always wags, legs move when walking, ear + head bob */
+  .nina-tail { transform-origin: 30px 56px; animation: nina-wag 1.1s ease-in-out infinite alternate; }
+  .nina.is-happy .nina-tail, .nina.is-walking .nina-tail { animation-duration: 0.35s; }
+  .nina-leg { transform-origin: center 64px; }
+  .nina.is-walking .nina-leg-a { animation: nina-step 0.42s ease-in-out infinite alternate; }
+  .nina.is-walking .nina-leg-b { animation: nina-step 0.42s ease-in-out infinite alternate-reverse; }
+  .nina.is-walking .sprite { animation: nina-bounce 0.42s ease-in-out infinite alternate; }
+  .nina-head { transform-origin: 106px 56px; }
+  .nina.is-walking .nina-head { animation: nina-nod 0.42s ease-in-out infinite alternate; }
+  .nina-ear { transform-origin: 104px 26px; animation: nina-ear 3s ease-in-out infinite alternate; }
+  .nina.is-walking .nina-ear { animation: nina-ear 0.42s ease-in-out infinite alternate; }
+  .nina-eye { transform-box: fill-box; transform-origin: center; animation: nina-blink 5s infinite; }
+  .nina-tongue { opacity: 0; transition: opacity 0.2s; }
+  .nina.is-happy .nina-tongue, .nina.is-walking .nina-tongue { opacity: 1; }
+  .nina-tags { transform-origin: 106px 64px; animation: nina-ear 2s ease-in-out infinite alternate; }
+
+  @keyframes nina-wag { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+  @keyframes nina-step { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+  @keyframes nina-bounce { to { translate: 0 -3px; } }
+  @keyframes nina-nod { to { transform: rotate(3deg) translateY(1px); } }
+  @keyframes nina-ear { to { transform: rotate(7deg); } }
+  @keyframes nina-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+
+  @media (max-width: 600px) { .nina { width: 84px; height: 63px; } .nina .bubble { width: 200px; margin-left: -100px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .nina-tail, .nina-ear, .nina-eye, .nina-tags, .nina .sprite, .nina-leg, .nina-head { animation: none !important; }
+  }
+</style>

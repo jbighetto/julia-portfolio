@@ -7,7 +7,7 @@ const latestRole = entry.roles[entry.roles.length - 1];
 const hasLadder = entry.roles.length > 1;
 const kindLabel = { 'full-time': 'Full-time', internship: 'Internship', education: 'Education' }[entry.kind];
 ---
-<li class={`item kind-${entry.kind}`} data-tl-item data-year={entry.year}>
+<li class={`item kind-${entry.kind}`} data-tl-item data-year={entry.year} data-nina={`work-${entry.id}`}>
   <span class="node" aria-hidden="true"></span>
   <article class="card">
     <header>
