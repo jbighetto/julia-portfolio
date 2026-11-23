@@ -9,9 +9,9 @@ export const site = {
     emphasis: 'making the world a little better.',
   },
   intro: 'Barcelona · MBA · retired Software Engineer',
-  email: 'jbighetto@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/REPLACE-ME', // TODO: real URL
-  resume: '/resume.pdf', // TODO: drop the PDF into /public/resume.pdf
+  email: 'julia.bighetto@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/julia-bighetto',
+  resume: '/resume.pdf',
 };
 
 export const nav = [
@@ -36,7 +36,7 @@ export const focusAreas = [
   },
 ];
 
-export const careerPath = ['Software Engineer', 'Engineering Manager', 'Technical Product Owner', 'MBA, Barcelona'];
+export const careerPath = ['Software Engineer', 'Engineering Manager', 'Technical Product Owner', 'MBA at IESE'];
 
 // Placeholder: replace with the real bio when ready.
 export const bio = [
@@ -52,4 +52,12 @@ export const bio = [
     heading: 'Outside of work',
     text: 'Placeholder. Exploring the streets of Barcelona, and whatever else I get up to.',
   },
+];
+
+export const quickFacts = [
+  { label: 'Languages', value: 'Portuguese (native), English (native), Spanish (B2)' },
+  { label: 'Education', value: 'MBA, IESE · B.A. Computer Science & B.S. Communications, Boston University' },
+  { label: 'Tech', value: 'JavaScript, TypeScript, Java, MongoDB · Python, SQL' },
+  { label: 'Certifications', value: 'Google Cloud Leadership (2025) · Scrum Master & Agile (2021)' },
+  { label: 'Work authorization', value: 'European Union, United States, Brazil' },
 ];

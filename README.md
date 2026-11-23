@@ -20,7 +20,7 @@ npm run build    # outputs dist/
 | `public/` | Static files. Put `resume.pdf` here. |
 
 ## TODO
-- Add `public/resume.pdf`
-- Set the real LinkedIn URL in `src/data/site.ts`
-- Replace placeholder bio and job highlights
+- Replace placeholder bio and the Aphasia Lab / 18 Moons highlights
+- Add a photo to the About page
+- Add GitHub link once the portfolio has projects
 - Deploy: connect the repo to Netlify (`netlify.toml` is already set)

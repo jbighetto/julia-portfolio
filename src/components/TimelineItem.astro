@@ -15,6 +15,7 @@ const kindLabel = { 'full-time': 'Full-time', internship: 'Internship', educatio
       <time>{entry.period}</time>
     </header>
     <h3>{entry.company}</h3>
+    <p class="where">{entry.location}</p>
     <p class="role">{latestRole.title}</p>
 
     {hasLadder && (
@@ -26,7 +27,9 @@ const kindLabel = { 'full-time': 'Full-time', internship: 'Internship', educatio
     )}
 
     <ul class="highlights">
-      {entry.highlights.map((h) => <li>{h}</li>)}
+      {entry.highlights.map((h) => (
+        <li>{typeof h === 'string' ? h : <a href={h.href} target="_blank" rel="noopener noreferrer">{h.text}</a>}</li>
+      ))}
     </ul>
   </article>
 </li>
@@ -55,7 +58,8 @@ const kindLabel = { 'full-time': 'Full-time', internship: 'Internship', educatio
   .kind { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tint); }
   time { color: var(--muted); }
   h3 { margin-bottom: 0.1rem; }
-  .role { color: var(--muted); margin-bottom: 1rem; }
+  .where { font-size: 0.8rem; color: var(--muted); margin: 0; }
+  .role { font-weight: 600; margin: 0.4rem 0 1rem; }
 
   .ladder { list-style: none; margin: 0 0 1rem; padding: 0 0 0 1rem; border-left: 2px dashed var(--border); display: grid; gap: 0.5rem; }
   .ladder li { display: flex; gap: 0.8rem; align-items: baseline; position: relative; }
